@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>For MY LITTLE PRINCESS BABY 💖</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at top, #2b1055, #000000);
+            color: white;
+            overflow: hidden;
+        }
+
+        h1 {
+            margin-top: 60px;
+            font-size: 45px;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            font-size: 28px;
+        }
+
+        img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid gold;
+            margin-top: 20px;
+            box-shadow: 0 0 30px gold;
+            object-fit: cover;
+        }
+
+        .buttons {
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 20px;
+            margin: 15px;
+            cursor: pointer;
+            border-radius: 30px;
+            border: none;
+            transition: 0.3s;
+        }
+
+        #yesBtn {
+            background: gold;
+            color: black;
+            box-shadow: 0 0 20px gold;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+        }
+
+        #noBtn {
+            background: crimson;
+            color: white;
+            position: absolute;
+        }
+
+        #message {
+            margin-top: 20px;
+            font-size: 26px;
+            color: gold;
+        }
+
+        #countdown {
+            margin-top: 15px;
+            font-size: 20px;
+            color: lightpink;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float 6s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh); opacity: 1; }
+            100% { transform: translateY(-10vh); opacity: 0; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="fireworks"></canvas>
+
+    <h1>MY LITTLE PRINCESS BABY 💖</h1>
+    <h2>Will You Go On Date With Me? 🌹✨</h2>
+
+
+    <div class="buttons">
+        <button id="yesBtn" onclick="celebrate()">Yes My Love ❤️</button>
+        <button id="noBtn" onmouseover="moveButton()">No 🙈</button>
+    </div>
+
+    <div id="message"></div>
+    <div id="countdown"></div>
+
+    <!-- Music -->
+    <audio autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+    </audio>
+
+    <script>
+        function moveButton() {
+            var noBtn = document.getElementById("noBtn");
+            var x = Math.random() * (window.innerWidth - 100);
+            var y = Math.random() * (window.innerHeight - 50);
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+        }
+
+        function celebrate() {
+            document.getElementById("message").innerHTML =
+                "SHE SAID YESSSS!!! 🎉💍 I LOVE YOU ❤️✨";
+
+            launchConfetti();
+            launchFireworks();
+        }
+
+        // Countdown
+        var date = new Date("Feb 25, 2026 18:00:00").getTime();
+
+        setInterval(function () {
+            var now = new Date().getTime();
+            var distance = date - now;
+
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+            document.getElementById("countdown").innerHTML =
+                "Countdown to our date: " + days + "d " + hours + "h " + minutes + "m 💕";
+        }, 1000);
+
+        // Floating hearts
+        setInterval(function () {
+            var heart = document.createElement("div");
+            heart.className = "heart";
+            heart.innerHTML = "💖";
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+            document.body.appendChild(heart);
+
+            setTimeout(function () { heart.remove(); }, 6000);
+        }, 400);
+
+        // Confetti
+        function launchConfetti() {
+            for (let i = 0; i < 150; i++) {
+                let confetti = document.createElement("div");
+                confetti.innerHTML = "🎉";
+                confetti.style.position = "absolute";
+                confetti.style.left = Math.random() * window.innerWidth + "px";
+                confetti.style.top = "-20px";
+                confetti.style.fontSize = "20px";
+                confetti.style.animation = "float 3s linear";
+                document.body.appendChild(confetti);
+
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        // Fireworks (simple effect)
+        function launchFireworks() {
+            const canvas = document.getElementById("fireworks");
+            const ctx = canvas.getContext("2d");
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            for (let i = 0; i < 100; i++) {
+                let x = Math.random() * canvas.width;
+                let y = Math.random() * canvas.height;
+                ctx.beginPath();
+                ctx.arc(x, y, 3, 0, Math.PI * 2);
+                ctx.fillStyle = "hsl(" + Math.random() * 360 + ", 100%, 50%)";
+                ctx.fill();
+            }
+
+            setTimeout(() => ctx.clearRect(0, 0, canvas.width, canvas.height), 2000);
+        }
+    </script>
+
+</body>
+</html>
